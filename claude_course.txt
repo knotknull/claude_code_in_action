@@ -1,0 +1,83 @@
+https://anthropic.skilljar.com/claude-code-in-action
+
+
+- coding assistants use language models to complete tasks
+- language models need to use tools to work tasks
+- Claude utilizes strong tool use with Claude Code
+
+Tools with Claude Code:
+Name            Purpose
+Agent           Launch a subagent to handle a task
+Bash            run a shell command
+Edit            edit a file
+Glob            find files based on a pattern
+Grep            search the contents of a file
+LS              List files and directories
+MultiEdit       Make several edits at the same time
+NotebookEdit    Write to a cell in a Jupyter notebook
+NotebookRead    Read a cell
+Read            Read a file
+TodoRead        Read one of the created to-do's
+TodoWrite       Update the list of to-do's
+WebFetch        Fetch from a URL
+WebSearch       Search the web
+Write           Write to a file 
+
+
+NOTE: at code enter /login to log into Pro plan.  Verify with /status
+      To use Claude Code with your Claude subscription: 
+      Keep the ANTHROPIC_API_KEY environment variable unset.
+NOTE: API credits at console.claude.com
+
+
+use /init to initialize claude to a project
+
+CLAUDE.md files:
+ - CLAUDE.md      :   generated with /init
+ - CLAUDE.local.md:   not shared with other engineers / personal instructions customizations
+ - ~/.claude/CLAUDE.local.md:   used with all projects on machine.  All projects
+
+
+ Use @ character to mention a file in a prompt to narrow down scope i.e. 
+How does this work?
+@uigen/src/hooks/use-auth.ts     
+
+
+Can add a screen shot to claude, download, copy via file manager then paste in to do some task
+it allows Claude to "see" the screen
+
+Plan Mode:  Shift + Tab  Shift + Tab (2x)
+In plan mode Claude more thorough research of contents of project.  It will then show 
+plan it will execute which can be accepted or not. 
+
+Enable Thinking: Lets Claude reason about challenging task.
+ - Think
+ - Think more
+ - Think a log
+ - Think longer
+ - Ultrathink
+
+NOTE: Plan Mode and Think Mode can be used toghether
+
+Plan   : breadth
+Thnking: depth 
+
+# Commit changes 
+" Stage and commit changes
+
+# Controlling context
+hit escape to interrupt Claude.
+
+# To jump back in conversation history: <Esc> * 2
+
+/compact : takes all commands in current session an summarizes them
+
+/clear   : dumps entire conversation history and starts from scratch
+
+
+
+
+
+
+
+
