@@ -75,9 +75,49 @@ hit escape to interrupt Claude.
 /clear   : dumps entire conversation history and starts from scratch
 
 
+# custom commands
+in current project enter commands as .md files 
+./.claude/commands/xyz.md
+
+show command by type / and scroll to new command
 
 
+# MCP servers
+# install a server
+claude mcp add playwright npx @playwright/mcp@latest
 
 
+To skip permission popups, edit ./.claude/settings.local.json:
+{
+      "permissions": {
+            "allow": ["mcp__playwrite"],              # Notice the "__"
+            "deny": []
+      }
+}
 
 
+# Github Integration 
+
+/install-github-app: sets up claud github actions for a repo
+
+# default github actions 
+Mention Action 
+ - Claude mentions with "@claude" 
+ - Claude Code runs
+ - Claude completes the task it was given with the mention
+ - Claude Code responds 
+      - response added to the issue or PR
+
+Pull request actions
+ - create a pull request
+      (triggers an action)
+ - Claude Code runs
+ - Claude Code reviews changes
+ - Claude Code posts a full report on the impact of the pull request
+
+ NOTE: In github, create an issue and in description include 
+ @claude can you take a look at this, Just test them out and verify 
+ that clicking them toggles between code and preview tabs
+
+
+ MAP:  Stopped @ Hooks and the SDK
