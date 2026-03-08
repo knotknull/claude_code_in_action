@@ -1,5 +1,6 @@
 https://anthropic.skilljar.com/claude-code-in-action
 
+anthropic/com/claude-code
 
 - coding assistants use language models to complete tasks
 - language models need to use tools to work tasks
@@ -122,3 +123,108 @@ Pull request actions
 
  MAP:  Stopped @ Hooks and the SDK
 https://anthropic.skilljar.com/claude-code-in-action/312000
+
+# Hooks
+
+run a command before / after a tool is run
+ - run tests automatcially
+ - run a linter on an updated file
+ - block edits on certain files or certain values, etc
+
+ - PreToolUse
+ - PostToolUse
+
+Hook Definitions in settins.json file: 
+  Global :  ~/.claude/settings.json 
+  Project: .claude/settings.json
+  Project (not committed) .claude/settings.local.json
+
+edit or use /hooks command
+
+
+ex. 
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+      "matcher": "Read",
+      "hooks": [
+        {
+           "type": "command", 
+           "command": "node /home/hooks/read_hook.ts"            
+        }
+      ]
+    }
+ ],
+    "PreToolUse": [
+      {
+      "matcher": "Write|Edit|MultiEdit",
+      "hooks": [
+        {
+           "type": "command", 
+           "command": "node /home/hooks/edit_hook.ts"            
+        }
+      ]
+    }
+  ] 
+}
+
+
+PreToolUse: can block a tool call and send error message back to Claude 
+PreToolUse: can't block, but can provide additional feedback
+
+
+NOTE: Tool Call Data is sent into command stdin: 
+{
+  "session_id": "2d6ae1e4d-"
+  "transcript_path": "/Users/sg/...",
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Read", 
+  "tool_input":  {
+      "file_path": "/code/queries/.env"
+  } 
+}
+
+NOTE: stdin input to commands changes based on hook being executed: (PreToolUse, PostToolUse, Notification,..._)
+This handy PostToolUse writes out sted in to a post-log.json file to figure out the input structure to the different tools 
+
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq . > post-log.json"
+          }
+        ]
+      }
+    ]
+
+
+
+# Claude Code SDK
+
+Claude Code SDK can be used by CLI, Typescript and Python 
+ex. 
+
+import anyio
+from claude_code_sdk import query 
+
+async def main():
+   prompt = "Look for duplicate queries"
+   async for message in query(prompt=prompt):
+      print(message)
+
+anyio.run(main)
+
+
+- runs Claude programatically
+- inherits all settings of Claude Code launched in same directory
+- read only perms by default
+- useful in pipeline or tool
+
+
+
+
+
+.
